@@ -1,6 +1,6 @@
 {
-  "name": "myapp",
-  "version": "0.1.0",
+  "name": "web-transcription",
+  "version": "0.9.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.4.1",

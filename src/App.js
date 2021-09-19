@@ -38,21 +38,28 @@ class App extends React.Component {
     const content = this.state.finalText;
     const blob = new Blob([content], { type: 'application/octet-stream' });
     const now = new Date();
-    const downloadTime = localStorage.getItem("todayDownload") ? Number(localStorage.getItem("todayDownload")) : 1;
     const link = document.createElement('a');
     const y = this.addZero(now.getFullYear());
     const m = this.addZero(now.getMonth() + 1);
     const d = this.addZero(now.getDate());
+    let downloadTime = 1;
+    if (localStorage.getItem("todayDownload")){
+     const todayDownloadJSON = JSON.parse(localStorage.getItem("todayDownload"));
+     if(todayDownloadJSON.date === y+m+d){
+       downloadTime = Number(todayDownloadJSON.time);
+     }
+    }
     link.href = URL.createObjectURL(blob);
     link.download = `transcription-${y}-${m}-${d}-${this.addDoubleZero(downloadTime)}.txt`;
     const nowDownloadTime = downloadTime + 1;
-    localStorage.setItem("todayDownload", nowDownloadTime);
+    const saveData = {date:y+m+d, time:nowDownloadTime};
     link.click();
+    localStorage.setItem("todayDownload", JSON.stringify(saveData));
     window.onbeforeunload = null;
   }
 
   addZero(int) {
-    return int < 10 ? "0" + int : int;
+    return int < 10 ? "0" + int : String(int);
   }
 
   addDoubleZero(int) {
@@ -61,7 +68,7 @@ class App extends React.Component {
     } else if (int < 100) {
       return "0" + int;
     } else {
-      return int;
+      return String(int);
     }
   }
 
