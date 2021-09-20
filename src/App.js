@@ -138,7 +138,7 @@ class App extends React.Component {
           <MenuAppBar onclick={(index) => this.changeLang(index)} disabled={this.state.isListen} />
 
           <div className="btns">
-            <Container maxWidth="md">
+            <Container maxWidth="sm">
               <div className="flex-2 top-marg">
                 <Button variant="contained" className={this.state.hideStart} onClick={() => this.start()}>文字起こし開始</Button>
                 <Button variant="contained" className={this.state.hideStop} onClick={() => this.stop()}>文字起こし停止</Button>
@@ -149,7 +149,7 @@ class App extends React.Component {
           </div>
         </div>
         <div className="body" id="body">
-          <Container maxWidth="md">
+          <Container maxWidth="sm">
             {this.state.finalText.split('\n').map((str, index) => (<React.Fragment key={index}>{this.state.finalText ? <p className="resultText">{str}</p> : null }</React.Fragment>))}<p className="gray resultText">{this.state.text}</p>
           </Container>
         </div>
