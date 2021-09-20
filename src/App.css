@@ -32,7 +32,8 @@
   padding: 2rem 0;
   color: #202020;
   overflow-y: auto;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
+  line-height: 1.5;
 }
 
 .flex-2 {
@@ -42,7 +43,7 @@
 }
 
 .gray {
-  color: gray;
+  color: #aaa;
 }
 
 .hide {
@@ -61,4 +62,21 @@
 
 .top-marg {
   margin-top: 1em;
+}
+
+p.resultText {
+  margin-block-start: 0;
+  margin-block-end: .7em;
+}
+
+@media only screen and (max-width: 64em) { 
+  .body {
+    font-size: 1.6rem;
+  }
+}
+
+@media only screen and (max-width: 40em) { 
+  .body {
+    font-size: 1.4rem;
+  }
 }

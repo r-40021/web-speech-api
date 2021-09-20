@@ -105,7 +105,7 @@ class App extends React.Component {
         for (let i = event.resultIndex; i < event.results.length; i++) {
           let transcript = event.results[i][0].transcript;
           if (event.results[i].isFinal) {
-            finalText += (finalText ? "\n\n" : "") + transcript;
+            finalText += (finalText ? "\n" : "") + transcript;
           } else {
             interimText += transcript;
           }
@@ -129,7 +129,7 @@ class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <div>
-          <MenuAppBar onclick={(index) => this.changeLang(index)} />
+          <MenuAppBar onclick={(index) => this.changeLang(index)} disabled={this.state.isListen}/>
 
           <div className="btns">
             <Container maxWidth="sm">
@@ -144,7 +144,7 @@ class App extends React.Component {
         </div>
         <div className="body" id="body">
           <Container maxWidth="sm">
-            {this.state.finalText.split('\n').map((str, index) => (<React.Fragment key={index}>{str}<br /></React.Fragment>))}<span className="gray">{this.state.text}</span>
+            {this.state.finalText.split('\n').map((str, index) => (<React.Fragment key={index}><p className="resultText">{str}</p></React.Fragment>))}<p className="gray resultText">{this.state.text}</p>
           </Container>
         </div>
 
@@ -241,7 +241,7 @@ function MenuAppBar(props) {
                 {options.map((option, index) => (
                   <MenuItem
                     key={option}
-                    disabled={index === 0}
+                    disabled={index === 0 || props.disabled}
                     selected={index === selectedIndex}
                     onClick={(event) => { handleMenuItemClick(event, index); props.onclick(index); }}
                   >
