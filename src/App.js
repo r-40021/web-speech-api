@@ -124,16 +124,6 @@ class App extends React.Component {
       recognition.lang = this.state.lang;
       recognition.interimResults = true;
       recognition.continuous = true;
-      recognition.onsoundend = function() {
-        if (this.state.isListen) {
-          recognition.start();
-        }
-       };
-      recognition.onend = () => {
-        if (this.state.isListen) {
-          recognition.start();
-        }
-      }
 
     }
     return (
