@@ -14,13 +14,18 @@ import IconButton from '@mui/material/IconButton';
 import LanguageIcon from '@mui/icons-material/Language';
 import Menu from '@mui/material/Menu';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Zoom from '@mui/material/Zoom';
 import './App.css';
 
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = new SpeechRecognition();
-
 let beforemove = false;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -44,16 +49,16 @@ class App extends React.Component {
     const m = this.addZero(now.getMonth() + 1);
     const d = this.addZero(now.getDate());
     let downloadTime = 1;
-    if (localStorage.getItem("todayDownload")){
-     const todayDownloadJSON = JSON.parse(localStorage.getItem("todayDownload"));
-     if(todayDownloadJSON.date === y+m+d){
-       downloadTime = Number(todayDownloadJSON.time);
-     }
+    if (localStorage.getItem("todayDownload")) {
+      const todayDownloadJSON = JSON.parse(localStorage.getItem("todayDownload"));
+      if (todayDownloadJSON.date === y + m + d) {
+        downloadTime = Number(todayDownloadJSON.time);
+      }
     }
     link.href = URL.createObjectURL(blob);
     link.download = `transcription-${y}-${m}-${d}-${this.addDoubleZero(downloadTime)}.txt`;
     const nowDownloadTime = downloadTime + 1;
-    const saveData = {date:y+m+d, time:nowDownloadTime};
+    const saveData = { date: y + m + d, time: nowDownloadTime };
     link.click();
     localStorage.setItem("todayDownload", JSON.stringify(saveData));
     window.onbeforeunload = null;
@@ -80,24 +85,25 @@ class App extends React.Component {
 
 
   render() {
-    if (typeof SpeechRecognition === 'undefined') {
-      this.setState({ status: 'このサイトは、Chrome、Edge、Firefoxにのみ対応しています。' })
-    } else {
+    if (typeof SpeechRecognition !== 'undefined') {
       this.stop = () => {
         recognition.abort();
         this.setState({ status: "「文字起こし開始」をクリックしてください。", isListen: false, hideStart: null, hideStop: "hide", });
       }
       this.start = () => {
-        recognition.start();
-        this.setState({ status: "あなたの美声を聞き取っています...", isListen: true, hideStart: "hide", hideStop: null, });
+        checkMicPermission(()=>{
+          recognition.start();
+          this.setState({ status: "あなたの美声を聞き取っています...", isListen: true, hideStart: "hide", hideStop: null, });
+        });
+        
       }
 
       let finalText = this.state.finalText;
       let interimText = '';
       recognition.onresult = (event) => {
         interimText = '';
-        if(!beforemove){
-          window.onbeforeunload = function(e) {
+        if (!beforemove) {
+          window.onbeforeunload = function (e) {
             return false;
           }
           beforemove = true;
@@ -129,7 +135,7 @@ class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <div>
-          <MenuAppBar onclick={(index) => this.changeLang(index)} disabled={this.state.isListen}/>
+          <MenuAppBar onclick={(index) => this.changeLang(index)} disabled={this.state.isListen} />
 
           <div className="btns">
             <Container maxWidth="sm">
@@ -144,7 +150,7 @@ class App extends React.Component {
         </div>
         <div className="body" id="body">
           <Container maxWidth="sm">
-            {this.state.finalText.split('\n').map((str, index) => (<React.Fragment key={index}><p className="resultText">{str}</p></React.Fragment>))}<p className="gray resultText">{this.state.text}</p>
+            {this.state.finalText.split('\n').map((str, index) => (<React.Fragment key={index}>{this.state.finalText ? <p className="resultText">{str}</p> : null }</React.Fragment>))}<p className="gray resultText">{this.state.text}</p>
           </Container>
         </div>
 
@@ -155,6 +161,8 @@ class App extends React.Component {
             </Fab>
           </Tooltip>
         </div>
+        <AlertDialogZoom />
+        <AlertfornotAPI />
 
       </React.Fragment >
     );
@@ -200,28 +208,28 @@ function MenuAppBar(props) {
           </Typography>
           {auth && (
             <div>
-               <Tooltip title="ソースコードを見る">
-              <IconButton
-                size="large"
-                aria-label="ソースコードを見る"
-                onClick={openGitHub}
-                color="inherit"
-              >
-                <GitHubIcon />
-              </IconButton>
+              <Tooltip title="ソースコードを見る">
+                <IconButton
+                  size="large"
+                  aria-label="ソースコードを見る"
+                  onClick={openGitHub}
+                  color="inherit"
+                >
+                  <GitHubIcon />
+                </IconButton>
               </Tooltip>
 
               <Tooltip title="検出する言語を変更">
-              <IconButton
-                size="large"
-                aria-label="検出する言語を変更"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <LanguageIcon />
-              </IconButton>
+                <IconButton
+                  size="large"
+                  aria-label="検出する言語を変更"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <LanguageIcon />
+                </IconButton>
               </Tooltip>
               <Menu
                 id="menu-appbar"
@@ -256,6 +264,94 @@ function MenuAppBar(props) {
     </Box>
   );
 }
+let handleClickOpen;
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Zoom ref={ref} {...props} />;
+});
+
+function AlertDialogZoom() {
+  const [open, setOpen] = React.useState(false);
+
+  handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="mic-permission"
+      >
+        <DialogTitle>{"マイクの使用を許可してください"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="mic-permission">
+            文字起こしをするためにはマイクが必要です。<br />
+            ブラウザの設定からマイクの使用を許可してください。
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>閉じる</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
+
+async function checkMicPermission(callback) {
+
+  try {
+    await navigator.mediaDevices.getUserMedia({ audio: true });
+    /* ストリームを使用 */
+    if(callback){
+      callback();
+    }
+  } catch (err) {
+    /* エラーを処理 */
+    handleClickOpen();
+    return false;
+  }
+}
+
+let openAlert2;
+
+function AlertfornotAPI() {
+  const [open, setOpen] = React.useState(false);
+
+  openAlert2 = () => {
+    setOpen(true);
+  };
+
+  return (
+    <div>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        aria-describedby="mic-permission"
+      >
+        <DialogTitle>{"お使いのブラウザには対応していません"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="mic-permission">
+            このアプリは、Chrome、Edge、Firefoxにのみ対応しています。
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}
+
+window.addEventListener("load",()=>{
+  if (typeof SpeechRecognition === 'undefined') {
+    openAlert2();
+  }
+},false);
 
 export default App;
