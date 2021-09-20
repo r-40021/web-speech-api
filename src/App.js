@@ -41,7 +41,7 @@ class App extends React.Component {
   }
 
   downloadAsText() {
-    const content = this.state.finalText + (this.state.text ? "\n" + this.state.text : "");
+    const content = this.state.finalText + (this.state.finalText && this.state.text ? "\n" : "") + this.state.text;
     const blob = new Blob([content], { type: 'application/octet-stream' });
     const now = new Date();
     const link = document.createElement('a');
