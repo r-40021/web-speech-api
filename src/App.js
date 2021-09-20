@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import LanguageIcon from '@mui/icons-material/Language';
 import Menu from '@mui/material/Menu';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import './App.css';
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -178,6 +179,9 @@ function MenuAppBar(props) {
     setAnchorEl(null);
   };
 
+  const openGitHub = () => {
+    window.open("https://github.com/r-40021/web-speech-api", "_blank")
+  }
 
   const options = [
     '音声認識で検出する言語を選択',
@@ -192,13 +196,25 @@ function MenuAppBar(props) {
         <Toolbar>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            文字起こし
+            文字起こしツール
           </Typography>
           {auth && (
             <div>
+               <Tooltip title="ソースコードを見る">
               <IconButton
                 size="large"
-                aria-label="account of current user"
+                aria-label="ソースコードを見る"
+                onClick={openGitHub}
+                color="inherit"
+              >
+                <GitHubIcon />
+              </IconButton>
+              </Tooltip>
+
+              <Tooltip title="検出する言語を変更">
+              <IconButton
+                size="large"
+                aria-label="検出する言語を変更"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
@@ -206,6 +222,7 @@ function MenuAppBar(props) {
               >
                 <LanguageIcon />
               </IconButton>
+              </Tooltip>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
