@@ -5,3 +5,5 @@
 文字起こしをすることができます。
 
 また、起こした文字は`.txt`形式で出力することができます。
+
+[アプリ](https://web-transcription.netlify.app/)
