@@ -125,12 +125,11 @@ class App extends React.Component {
       recognition.interimResults = true;
       recognition.continuous = true;
       
-      recognition.onsoundend = function() {
+      recognition.onend = () => {
         if (this.state.isListen) {
           recognition.start();
         }
-       };
-
+      }
     }
     return (
       <React.Fragment>
