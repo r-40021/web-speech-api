@@ -384,9 +384,6 @@ function OfflineDialogZoom() {
             インターネット接続を確認してください。
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={offlineHandleClose}>閉じる</Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
