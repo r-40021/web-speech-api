@@ -36,8 +36,7 @@ class App extends React.Component {
       text: '',
       finalText: '',
       isListen: false,
-      hideStart: null,
-      hideStop: 'hide',
+      btnLabel: "文字起こし開始",
       lang: 'ja-JP',
     };
   }
@@ -87,18 +86,27 @@ class App extends React.Component {
   }
 
 
+  handleClickStartStop() {
+    if (this.state.isListen) {
+      this.stop();
+    } else {
+      this.start();
+    }
+  }
+
+
   render() {
     if (typeof SpeechRecognition !== 'undefined') {
       this.stop = () => {
-        recognition.abort();
-        this.setState({ status: "「文字起こし開始」をクリックしてください。", isListen: false, hideStart: null, hideStop: "hide", });
+        recognition.stop();
+        this.setState({ status: "「文字起こし開始」をクリックしてください。", isListen: false, btnLabel: "文字起こし開始" });
       }
       this.start = () => {
-        checkMicPermission(()=>{
+        checkMicPermission(() => {
           recognition.start();
-          this.setState({ status: "あなたの美声を聞き取っています...", isListen: true, hideStart: "hide", hideStop: null, });
+          this.setState({ status: "あなたの美声を聞き取っています...", isListen: true, btnLabel: "文字起こし停止" });
         });
-        
+
       }
 
       let finalText = this.state.finalText;
@@ -127,7 +135,7 @@ class App extends React.Component {
       recognition.lang = this.state.lang;
       recognition.interimResults = true;
       recognition.continuous = true;
-      
+
       recognition.onend = () => {
         if (isSafari) {
           this.stop();
@@ -145,8 +153,7 @@ class App extends React.Component {
           <div className="btns">
             <Container maxWidth="md">
               <div className="flex-2 top-marg">
-                <Button variant="contained" className={this.state.hideStart} onClick={() => this.start()}>文字起こし開始</Button>
-                <Button variant="contained" className={this.state.hideStop} onClick={() => this.stop()}>文字起こし停止</Button>
+                <Button variant="contained" onClick={()=>this.handleClickStartStop()}>{this.state.btnLabel}</Button>
 
                 <span className="status">{this.state.status}</span>
               </div>
@@ -155,7 +162,7 @@ class App extends React.Component {
         </div>
         <div className="body" id="body">
           <Container maxWidth="md">
-            {this.state.finalText.split('\n').map((str, index) => (<React.Fragment key={index}>{this.state.finalText ? <p className="resultText">{str}</p> : null }</React.Fragment>))}<p className="gray resultText">{this.state.text}</p>
+            {this.state.finalText.split('\n').map((str, index) => (<React.Fragment key={index}>{this.state.finalText ? <p className="resultText">{str}</p> : null}</React.Fragment>))}<p className="gray resultText">{this.state.text}</p>
           </Container>
         </div>
 
@@ -168,6 +175,7 @@ class App extends React.Component {
         </div>
         <AlertDialogZoom />
         <AlertfornotAPI />
+        <SafariDialogZoom />
 
       </React.Fragment >
     );
@@ -315,7 +323,7 @@ async function checkMicPermission(callback) {
   try {
     await navigator.mediaDevices.getUserMedia({ audio: true });
     /* ストリームを使用 */
-    if(callback){
+    if (callback) {
       callback();
     }
   } catch (err) {
@@ -342,21 +350,58 @@ function AlertfornotAPI() {
         keepMounted
         aria-describedby="mic-permission"
       >
-        <DialogTitle>{isSafari ? "Safari では一部の機能が制限されます" : "お使いのブラウザには対応していません"}</DialogTitle>
+        <DialogTitle>{"お使いのブラウザには対応していません"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="mic-permission">
-            {isSafari ? "Safari では書き起こしが途中で中断されることがあります。" : "このアプリは、Chrome、Edge、Firefoxに対応しています。"}
+            このアプリは、Chrome、Edge、Firefoxに対応しています。
           </DialogContentText>
         </DialogContent>
       </Dialog>
     </div>
   );
 }
+let safariHandleClickOpen;
+function SafariDialogZoom() {
+  const [open, setOpen] = React.useState(false);
 
-window.addEventListener("load",()=>{
-  if (typeof SpeechRecognition === 'undefined' || isSafari) {
+  safariHandleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="mic-permission"
+      >
+        <DialogTitle>{"お使いのブラウザでは一部の機能が制限されます"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="mic-permission">
+            Safari では文字起こしが知らぬ間に停止することがあります。<br />
+            URL バーの左のインジケーターで、音声認識が停止していないか確認しながらご利用ください。
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>閉じる</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
+
+window.addEventListener("load", () => {
+  if (isSafari) {
+    safariHandleClickOpen();
+  } else if (typeof SpeechRecognition === 'undefined') {
     openAlert2();
   }
-},false);
+}, false);
 
 export default App;
