@@ -25,8 +25,6 @@ import './App.css';
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = new SpeechRecognition();
 let beforemove = false;
-const ua = window.navigator.userAgent.toLowerCase();
-const isSafari = ua.indexOf('safari') !== -1 && ua.indexOf('chrome') === -1 && ua.indexOf('edge') === -1 && ua.indexOf('opera') === -1;
 
 class App extends React.Component {
   constructor(props) {
@@ -137,9 +135,7 @@ class App extends React.Component {
       recognition.continuous = true;
 
       recognition.onend = () => {
-        if (isSafari) {
-          this.stop();
-        } else if (this.state.isListen) {
+       if (this.state.isListen) {
           recognition.start();
         }
       }
@@ -175,7 +171,7 @@ class App extends React.Component {
         </div>
         <AlertDialogZoom />
         <AlertfornotAPI />
-        <SafariDialogZoom />
+        <OfflineDialogZoom />
 
       </React.Fragment >
     );
@@ -360,15 +356,15 @@ function AlertfornotAPI() {
     </div>
   );
 }
-let safariHandleClickOpen;
-function SafariDialogZoom() {
+let offlineHandleClickOpen,offlineHandleClose;
+function OfflineDialogZoom() {
   const [open, setOpen] = React.useState(false);
 
-  safariHandleClickOpen = () => {
+  offlineHandleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  offlineHandleClose = () => {
     setOpen(false);
   };
 
@@ -381,11 +377,11 @@ function SafariDialogZoom() {
         onClose={handleClose}
         aria-describedby="mic-permission"
       >
-        <DialogTitle>{"お使いのブラウザでは一部の機能が制限されます"}</DialogTitle>
+        <DialogTitle>{"オフラインになっています"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="mic-permission">
-            Safari では、文字起こしが知らぬ間に停止することがあります。<br />
-            URL バーの左のインジケーターで、音声認識が停止していないか確認しながらご利用ください。
+            オフライン状態では高確率で音声認識が動作しません。<br />
+            インターネット接続を確認してください。
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -396,12 +392,28 @@ function SafariDialogZoom() {
   );
 }
 
+function checkOnline(){
+  if( navigator.onLine ) {
+    offlineHandleClickOpen();
+  } else {
+    offlineHandleClose();
+  }
+}
+
 window.addEventListener("load", () => {
-  if (isSafari) {
-    safariHandleClickOpen();
-  } else if (typeof SpeechRecognition === 'undefined') {
+ if (typeof SpeechRecognition === 'undefined') {
     openAlert2();
+  } else {
+    checkOnline()
   }
 }, false);
+
+window.addEventListener('online', function(){
+  checkOnline();
+});
+
+window.addEventListener('offline', function(){
+  checkOnline();
+});
 
 export default App;
