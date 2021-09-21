@@ -1,6 +1,6 @@
 {
-    "name": "\u6587\u5b57\u8d77\u3053\u3057",
-    "short_name": "\u6587\u5b57\u8d77\u3053\u3057",
+    "name": "文字起こしツール",
+    "short_name": "文字起こし",
     "icons": [
         {
             "src": "android-chrome-192x192.png",
@@ -13,7 +13,10 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
+    "theme_color": "#1976d2",
     "background_color": "#ffffff",
-    "display": "standalone"
+    "display": "standalone",
+    "start_url":"/",
+    "dir":"ltr",
+    "lang":"ja-jp"
 }
