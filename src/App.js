@@ -384,7 +384,7 @@ function SafariDialogZoom() {
         <DialogTitle>{"お使いのブラウザでは一部の機能が制限されます"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="mic-permission">
-            Safari では文字起こしが知らぬ間に停止することがあります。<br />
+            Safari では、文字起こしが知らぬ間に停止することがあります。<br />
             URL バーの左のインジケーターで、音声認識が停止していないか確認しながらご利用ください。
           </DialogContentText>
         </DialogContent>
