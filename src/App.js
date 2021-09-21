@@ -297,11 +297,11 @@ function AlertDialogZoom() {
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-        aria-describedby="mic-permission"
+        aria-describedby="マイク使用許可"
       >
         <DialogTitle>{"マイクの使用を許可してください"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="mic-permission">
+          <DialogContentText id="マイク使用許可">
             文字起こしをするためにはマイクが必要です。<br />
             ブラウザの設定からマイクの使用を許可してください。
           </DialogContentText>
@@ -344,11 +344,11 @@ function AlertfornotAPI() {
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        aria-describedby="mic-permission"
+        aria-describedby="非対応ブラウザ"
       >
         <DialogTitle>{"お使いのブラウザには対応していません"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="mic-permission">
+          <DialogContentText id="非対応ブラウザ">
             このアプリは、Chrome、Edge、Firefoxに対応しています。
           </DialogContentText>
         </DialogContent>
@@ -374,18 +374,18 @@ function OfflineDialogZoom() {
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
-        aria-describedby="mic-permission"
+        onClose={offlineHandleClose}
+        aria-describedby="オフライン"
       >
         <DialogTitle>{"オフラインになっています"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="mic-permission">
+          <DialogContentText id="オフライン">
             オフライン状態では高確率で音声認識が動作しません。<br />
             インターネット接続を確認してください。
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>閉じる</Button>
+          <Button onClick={offlineHandleClose}>閉じる</Button>
         </DialogActions>
       </Dialog>
     </div>
