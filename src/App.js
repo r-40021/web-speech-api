@@ -394,9 +394,9 @@ function OfflineDialogZoom() {
 
 function checkOnline(){
   if( navigator.onLine ) {
-    offlineHandleClickOpen();
-  } else {
     offlineHandleClose();
+  } else {
+    offlineHandleClickOpen();
   }
 }
 
