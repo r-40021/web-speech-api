@@ -25,6 +25,8 @@ import './App.css';
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = new SpeechRecognition();
 let beforemove = false;
+const ua = window.navigator.userAgent.toLowerCase();
+const isSafari = ua.indexOf('safari') !== -1 && ua.indexOf('chrome') === -1 && ua.indexOf('edge') === -1 && ua.indexOf('opera') === -1;
 
 class App extends React.Component {
   constructor(props) {
@@ -127,7 +129,9 @@ class App extends React.Component {
       recognition.continuous = true;
       
       recognition.onend = () => {
-        if (this.state.isListen) {
+        if (isSafari) {
+          this.stop();
+        } else if (this.state.isListen) {
           recognition.start();
         }
       }
@@ -338,10 +342,10 @@ function AlertfornotAPI() {
         keepMounted
         aria-describedby="mic-permission"
       >
-        <DialogTitle>{"お使いのブラウザには対応していません"}</DialogTitle>
+        <DialogTitle>{isSafari ? "Safari では一部の機能が制限されます" : "お使いのブラウザには対応していません"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="mic-permission">
-            このアプリは、Chrome、Edge、Firefoxにのみ対応しています。
+            {isSafari ? "Safari では書き起こしが途中で中断されることがあります。" : "このアプリは、Chrome、Edge、Firefoxに対応しています。"}
           </DialogContentText>
         </DialogContent>
       </Dialog>
@@ -350,7 +354,7 @@ function AlertfornotAPI() {
 }
 
 window.addEventListener("load",()=>{
-  if (typeof SpeechRecognition === 'undefined') {
+  if (typeof SpeechRecognition === 'undefined' || isSafari) {
     openAlert2();
   }
 },false);
