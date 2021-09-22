@@ -212,8 +212,8 @@ function MenuAppBar(props) {
       <AppBar position="static" color='transparent' className="header">
         <Toolbar>
 
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} className="header-title">
-            文字起こしツール
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <span className="header-title">文字起こしツール</span>
           </Typography>
           {auth && (
             <div>
