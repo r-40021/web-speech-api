@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+body {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 
 #root {
   display: flex;
@@ -23,9 +30,7 @@
   font-weight: bold;
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
-.header {
-  border-radius: 10px;
-}
+
 .header-title{
   color: #1976d2;
   background: -webkit-linear-gradient(to right, #1976d2 0%, #00f2fe 100%);
@@ -37,11 +42,6 @@
 .header svg{
   fill: #1976d2;
 }
-.header-wrapper {
-  width: 100%;
-  padding: 6px;
-}
-
 
 .btns {
   height: auto;
@@ -53,6 +53,10 @@
   overflow-y: auto;
   font-size: 1.8rem;
   line-height: 1.5;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 .flex-2 {

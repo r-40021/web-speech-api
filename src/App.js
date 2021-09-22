@@ -208,7 +208,7 @@ function MenuAppBar(props) {
   ];
 
   return (
-    <Box sx={{ flexGrow: 1 }} className="header-wrapper">
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color='transparent' className="header">
         <Toolbar>
 
