@@ -23,6 +23,25 @@
   font-weight: bold;
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
+.header {
+  border-radius: 10px;
+}
+.header-title{
+  color: #1976d2;
+  background: -webkit-linear-gradient(to right, #1976d2 0%, #00f2fe 100%);
+  background: linear-gradient(to right, #1976d2 0%, #00f2fe 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.header svg{
+  fill: #1976d2;
+}
+.header-wrapper {
+  width: 100%;
+  padding: 6px;
+}
+
 
 .btns {
   height: auto;
