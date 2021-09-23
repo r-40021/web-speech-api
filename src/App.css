@@ -45,6 +45,7 @@ body {
 
 .btns {
   height: auto;
+  padding-bottom: 10px;
 }
 .body {
   flex: 1;
