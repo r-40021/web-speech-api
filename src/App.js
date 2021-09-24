@@ -94,7 +94,7 @@ class App extends React.Component {
 
 
   render() {
-    if (typeof SpeechRecognition !== 'undefined') {
+    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
       this.stop = () => {
         recognition.stop();
         this.setState({ status: "「文字起こし開始」をクリックしてください。", isListen: false, btnLabel: "文字起こし開始" });
@@ -398,7 +398,7 @@ function checkOnline(){
 }
 
 window.addEventListener("load", () => {
- if (typeof SpeechRecognition === 'undefined') {
+ if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
     openAlert2();
   } else {
     checkOnline()
