@@ -7,7 +7,8 @@
 
 # スクリーンショット
 
-![スクリーンショット](https://r-40021.github.io/uploads/2021/09/23/transcription.png)
+![スクリーンショット](https://user-images.githubusercontent.com/75155258/134788580-3e13f9b9-772d-4ef1-9c9f-4a311f74ba0f.png)
+
 
 # 特長
 - ブラウザだけで手軽に文字起こしをすることができます。
