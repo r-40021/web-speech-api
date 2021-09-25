@@ -38,6 +38,7 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-family: inherit;
 }
 .header svg{
   fill: #1976d2;
