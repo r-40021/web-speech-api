@@ -22,6 +22,6 @@
 - [Edge](https://www.microsoft.com/edge) や [Safari](https://www.apple.com/jp/safari/)、[Firefox](https://www.mozilla.org/ja/firefox/new/) にも対応していますが、正常に動作しなかったり動作が不安定だったりすることがあります。
 - Chromium 系ブラウザでは動作しないことがあります。
 
-# ライセンス表示
+# オープンソースライセンス
 - [create-react-app](https://github.com/facebook/create-react-app/blob/main/LICENSE) &copy; 2013-present, Facebook, Inc.
 - [Material-UI](https://github.com/mui-org/material-ui/blob/master/LICENSE) &copy; 2014 Call-Em-All
