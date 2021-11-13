@@ -209,11 +209,11 @@ function MenuAppBar(props) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color='transparent' className="header">
+      <AppBar position="static" className="header">
         <Toolbar>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <span className="header-title">文字起こしツール</span>
+            文字起こしツール
           </Typography>
           {auth && (
             <div>

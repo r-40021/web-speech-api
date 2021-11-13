@@ -31,19 +31,6 @@ body {
   src: local("YoGothic-Bold"), local("Yu Gothic");
 }
 
-.header-title{
-  color: #1976d2;
-  background: -webkit-linear-gradient(to right, #1976d2 0%, #00acfe 100%);
-  background: linear-gradient(to right, #1976d2 0%, #00acfe 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: inherit;
-}
-.header svg{
-  fill: #1976d2;
-}
-
 .btns {
   height: auto;
   padding-bottom: 10px;
