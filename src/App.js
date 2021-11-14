@@ -201,7 +201,7 @@ function MenuAppBar(props) {
   }
 
   const options = [
-    '音声認識で検出する言語を選択',
+    '話す言語を選択...',
     '日本語',
     '英語（米国）',
     '英語（英国）',
@@ -228,10 +228,10 @@ function MenuAppBar(props) {
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="検出する言語を変更">
+              <Tooltip title="話す言語を選択...">
                 <IconButton
                   size="large"
-                  aria-label="検出する言語を変更"
+                  aria-label="話す言語を選択"
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
                   onClick={handleMenu}
