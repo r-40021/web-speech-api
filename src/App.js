@@ -19,7 +19,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Zoom from '@mui/material/Zoom';
+import Grow from '@mui/material/Grow';
 import './App.css';
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -279,7 +279,7 @@ function MenuAppBar(props) {
 let handleClickOpen;
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Zoom ref={ref} {...props} />;
+  return <Grow ref={ref} {...props} />;
 });
 
 function AlertDialogZoom() {
@@ -305,8 +305,8 @@ function AlertDialogZoom() {
         <DialogTitle>{"マイクの使用を許可してください"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="マイク使用許可">
-            <p>文字起こしをするためにはマイクが必要です。</p>
-            <p>ブラウザの設定からマイクの使用を許可してください。</p>
+            文字起こしをするためにはマイクが必要です。<br />
+            ブラウザの設定からマイクの使用を許可してください。
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -352,8 +352,8 @@ function AlertfornotAPI() {
         <DialogTitle>{"お使いのブラウザは対応していません"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="非対応ブラウザ">
-            <p>このアプリは、Chrome、Edge、Safari に対応しています。</p>
-            <p>これらのブラウザからアクセスしなおしてください。</p>
+            このアプリは、Chrome、Edge、Safari に対応しています。<br />
+            これらのブラウザからアクセスしなおしてください。
           </DialogContentText>
         </DialogContent>
       </Dialog>
@@ -384,8 +384,8 @@ function OfflineDialogZoom() {
         <DialogTitle>{"オフラインになっています"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="オフライン">
-            <p>オフライン状態では高確率で音声認識が動作しません。</p>
-            <p>インターネット接続を確認してください。</p>
+            オフライン状態では高確率で音声認識が動作しません。<br />
+            インターネット接続を確認してください。
           </DialogContentText>
         </DialogContent>
       </Dialog>

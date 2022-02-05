@@ -1,7 +1,6 @@
 * {
   font-family: -apple-system, blinkMacSystemFont, "Helvetica Neue", "Segoe UI",
-    "Roboto", "Arial", "Hiragino Kaku Gothic ProN", YuGothicM, YuGothic, Meiryo,
-    sans-serif;
+    "Roboto", "Arial", sans-serif;
     box-sizing: border-box;
 }
 
@@ -17,18 +16,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-
-@font-face {
-  font-family: YuGothicM;
-  font-weight: normal;
-  src: local("YuGothic-Medium"), local("Yu Gothic Medium"),
-    local("YuGothic-Regular"); /* Windows8.1ではMediumがないのでRegularを指定 */
-}
-@font-face {
-  font-family: YuGothicM;
-  font-weight: bold;
-  src: local("YoGothic-Bold"), local("Yu Gothic");
 }
 
 .btns {
@@ -74,8 +61,8 @@ body {
 }
 
 p.resultText {
-  margin-block-start: 0;
-  margin-block-end: .7em;
+  margin-top: 0;
+  margin-bottom: .7em;
 }
 
 @media only screen and (max-width: 64em) { 
