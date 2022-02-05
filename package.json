@@ -12,6 +12,8 @@
     "@testing-library/user-event": "^13.5.0",
     "cra-template-pwa": "^1.0.3",
     "framer-motion": "^6.2.4",
+    "nth-check": "^2.0.1",
+    "postcss": "^8.2.13",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
