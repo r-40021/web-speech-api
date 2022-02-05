@@ -23,7 +23,10 @@ import Zoom from '@mui/material/Zoom';
 import './App.css';
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recognition = new SpeechRecognition();
+let recognition;
+if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+  recognition = new SpeechRecognition();
+}
 let beforemove = false;
 
 class App extends React.Component {
@@ -135,7 +138,7 @@ class App extends React.Component {
       recognition.continuous = true;
 
       recognition.onend = () => {
-       if (this.state.isListen) {
+        if (this.state.isListen) {
           recognition.start();
         }
       }
@@ -149,7 +152,7 @@ class App extends React.Component {
           <div className="btns">
             <Container maxWidth="md">
               <div className="flex-2 top-marg">
-                <Button variant="contained" onClick={()=>this.handleClickStartStop()}>{this.state.btnLabel}</Button>
+                <Button variant="contained" onClick={() => this.handleClickStartStop()}>{this.state.btnLabel}</Button>
 
                 <span className="status">{this.state.status}</span>
               </div>
@@ -302,8 +305,8 @@ function AlertDialogZoom() {
         <DialogTitle>{"マイクの使用を許可してください"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="マイク使用許可">
-            文字起こしをするためにはマイクが必要です。<br />
-            ブラウザの設定からマイクの使用を許可してください。
+            <p>文字起こしをするためにはマイクが必要です。</p>
+            <p>ブラウザの設定からマイクの使用を許可してください。</p>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -346,17 +349,18 @@ function AlertfornotAPI() {
         keepMounted
         aria-describedby="非対応ブラウザ"
       >
-        <DialogTitle>{"お使いのブラウザには対応していません"}</DialogTitle>
+        <DialogTitle>{"お使いのブラウザは対応していません"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="非対応ブラウザ">
-            このアプリは、Chrome、Edge、Firefoxに対応しています。
+            <p>このアプリは、Chrome、Edge、Safari に対応しています。</p>
+            <p>これらのブラウザからアクセスしなおしてください。</p>
           </DialogContentText>
         </DialogContent>
       </Dialog>
     </div>
   );
 }
-let offlineHandleClickOpen,offlineHandleClose;
+let offlineHandleClickOpen, offlineHandleClose;
 function OfflineDialogZoom() {
   const [open, setOpen] = React.useState(false);
 
@@ -380,8 +384,8 @@ function OfflineDialogZoom() {
         <DialogTitle>{"オフラインになっています"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="オフライン">
-            オフライン状態では高確率で音声認識が動作しません。<br />
-            インターネット接続を確認してください。
+            <p>オフライン状態では高確率で音声認識が動作しません。</p>
+            <p>インターネット接続を確認してください。</p>
           </DialogContentText>
         </DialogContent>
       </Dialog>
@@ -389,8 +393,8 @@ function OfflineDialogZoom() {
   );
 }
 
-function checkOnline(){
-  if( navigator.onLine ) {
+function checkOnline() {
+  if (navigator.onLine) {
     offlineHandleClose();
   } else {
     offlineHandleClickOpen();
@@ -398,18 +402,18 @@ function checkOnline(){
 }
 
 window.addEventListener("load", () => {
- if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+  if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
     openAlert2();
   } else {
     checkOnline()
   }
 }, false);
 
-window.addEventListener('online', function(){
+window.addEventListener('online', function () {
   checkOnline();
 });
 
-window.addEventListener('offline', function(){
+window.addEventListener('offline', function () {
   checkOnline();
 });
 
