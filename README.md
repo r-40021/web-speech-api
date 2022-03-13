@@ -2,12 +2,12 @@
 
 <img src="./public/ogp.png" width="50%">
 
-[アプリを開く](https://web-transcription.netlify.app/)
+[アプリを開く](https://web-transcription.pages.dev/)
 
 
 # スクリーンショット
 
-![スクリーンショット](https://user-images.githubusercontent.com/75155258/134788580-3e13f9b9-772d-4ef1-9c9f-4a311f74ba0f.png)
+![スクリーンショット](https://user-images.githubusercontent.com/75155258/158047500-07103080-251a-49d0-b019-d4e692b0959d.png)
 
 
 # 特長
