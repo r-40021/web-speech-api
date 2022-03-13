@@ -19,8 +19,8 @@
 このアプリは Web Speech API という新しい技術を使用しているため、ブラウザによっては動作しないことがあります。
 
 - 何もこだわりがなければ [**Google Chrome**](https://chrome.google.com/) がおすすめです
-- [Edge](https://www.microsoft.com/edge) や [Safari](https://www.apple.com/jp/safari/)、[Firefox](https://www.mozilla.org/ja/firefox/new/) にも対応していますが、正常に動作しなかったり動作が不安定だったりすることがあります。
-- Chromium 系ブラウザでは動作しないことがあります。
+- [Edge](https://www.microsoft.com/edge) や [Safari](https://www.apple.com/jp/safari/) にも対応していますが、正常に動作しなかったり動作が不安定だったりすることがあります。
+- Chromium "系"ブラウザでは動作しないことがあります。
 
 # オープンソースライセンス
 - [create-react-app](https://github.com/facebook/create-react-app/blob/main/LICENSE) &copy; 2013-present, Facebook, Inc.
