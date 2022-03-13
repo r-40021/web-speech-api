@@ -1,6 +1,6 @@
 {
   "name": "web-transcription",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.4.1",
@@ -42,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
