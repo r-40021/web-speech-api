@@ -3,6 +3,7 @@ services:
   app:
     build: .
     tty: true
+    user: node
     ports:
       - 3000:3000
     volumes:
