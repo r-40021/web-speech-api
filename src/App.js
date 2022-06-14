@@ -334,6 +334,10 @@ async function checkMicPermission(callback) {
 
 let openAlert2;
 
+/**
+ * ブラウザ対応しているか確認
+ * @returns {void}
+ */
 function AlertfornotAPI() {
   const [open, setOpen] = React.useState(false);
 
