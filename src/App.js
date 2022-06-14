@@ -349,7 +349,7 @@ function AlertfornotAPI() {
         keepMounted
         aria-describedby="非対応ブラウザ"
       >
-        <DialogTitle>{"お使いのブラウザは対応していません"}</DialogTitle>
+        <DialogTitle>{"このブラウザは対応していません"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="非対応ブラウザ">
             このアプリは、Chrome、Edge、Safari に対応しています。<br />
