@@ -2,7 +2,7 @@
 
 <img src="./public/ogp.png" width="50%">
 
-[アプリを開く](https://web-transcription.pages.dev/)
+[アプリを開く](https://speech.frogapp.net)
 
 
 # スクリーンショット
