@@ -1,7 +1,7 @@
 name: purge_cache
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "gh-pages" ]
 
   workflow_dispatch:
 
