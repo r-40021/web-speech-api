@@ -3,12 +3,33 @@
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0;https://web-transcription.pages.dev/">
+  <meta http-equiv="refresh" content="0;https://speech.frogapp.net/">
   <title>Redirecting...</title>
 </head>
 
 <body>
-  <p>Redirecting to <a href="https://web-transcription.pages.dev/">https://web-transcription.pages.dev/</a> ...</p>
+  <p>Redirecting to <a href="https://speech.frogapp.net/">https://speech.frogapp.net/</a> ...</p>
+  
+  <script>
+        if ("serviceWorker" in navigator) {
+            /*Service Worker登録
+            (引用:https://developers.google.com/web/fundamentals/primers/service-workers)*/
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("/service-worker.js").then(
+                    function (registration) {
+                        // Registration was successful
+                        console.log(
+                            "ServiceWorker registration successful with scope: ",
+                            registration.scope
+                        );
+                    },
+                    function (err) {
+                        // registration failed :(
+                        console.log("ServiceWorker registration failed: ", err);
+                    }
+                );
+            });
+        }
 </body>
 
 </html>
